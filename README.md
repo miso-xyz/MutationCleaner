@@ -29,3 +29,7 @@ this.button2.Size = new Size(0x13 + 1, 0x13 + ((0x1C9 < 0x418) ? 1 : 0));
 
 # Screenshot
 ![app](https://i.imgur.com/8PIdh3O.png)
+
+# Credits
+- 0xd4d (now wtfsck) - <a href="https://github.com/0xd4d/dnlib">dnlib</a>
+- <a href="https://github.com/bobRE12">bobRE12</a> - dmed a CrackMe
