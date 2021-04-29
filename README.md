@@ -7,7 +7,10 @@ This remover removes 2d point mutations. It's very basic so there is a slight po
 - Improvements on CUI
 </pre>
 
-# Example of what it does
+# How to use
+Drag & Drop to remove Point & TimeSpan Mutations
+
+# Code Examples
 **Point Mutation Example:**
 ```csharp
 int test = new Point(123, 312).X
@@ -24,5 +27,5 @@ this.button2.Size = new Size((int)new TimeSpan(0xF, 0x30, 0xB40, 0xC).TotalDays 
 this.button2.Size = new Size(0x13 + 1, 0x13 + ((0x1C9 < 0x418) ? 1 : 0));
 ```
 
-# How to use
-Drag & Drop to remove Point & TimeSpan Mutations
+# Screenshot
+![app](https://i.imgur.com/8PIdh3O.png)
