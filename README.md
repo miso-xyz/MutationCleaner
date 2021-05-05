@@ -4,6 +4,7 @@ This remover removes 2d point mutations. It's very basic so there is a slight po
 # Mod Improvements
 <pre>
 - Can now clean TimeSpan Mutations
+- Solve simple math calculations
 - Improvements on CUI
 </pre>
 
