@@ -34,6 +34,7 @@ namespace IntptrPoint
             Console.WriteLine(" Mod by misonothx");
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("  |- TimeSpan Cleaner");
+            Console.WriteLine("  |- Simple Math Cleaner");
             Console.WriteLine("  |- CUI Changes & fixes");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
@@ -58,17 +59,18 @@ namespace IntptrPoint
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(" Now cleaning...");
                 Console.WriteLine();
-                IntptrPoint.PointRemover.Clean();
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(" Failed to clean. (" + ex.Message + ")");
             }
+            IntptrPoint.PointRemover.Clean();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(" Removed " + PointRemover.timeSpanCleaned + " TimeSpans mutations");
-            Console.WriteLine(" Removed " + IntptrPoint.PointRemover.amount + " point mutations");
+            Console.WriteLine(" Removed " + IntptrPoint.PointRemover.mathFixed + " Math calculations");
+            Console.WriteLine(" Removed " + PointRemover.timeSpanCleaned + " TimeSpan mutations");
+            Console.WriteLine(" Removed " + IntptrPoint.PointRemover.amount + " Point mutations");
             Console.WriteLine();
             ModuleWriterOptions writerOptions = new ModuleWriterOptions(Program.module);
             writerOptions.MetaDataOptions.Flags |= MetaDataFlags.PreserveAll;

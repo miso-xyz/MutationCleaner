@@ -12,7 +12,9 @@ namespace IntptrPoint
     class PointRemover
     {
         public static int amount = 0;
+        public static int mathFixed = 0;
         public static int timeSpanCleaned = 0;
+
         public static void Clean()
         {
             foreach (TypeDef types in Program.module.GetTypes())
@@ -24,6 +26,56 @@ namespace IntptrPoint
                     {
                         Instruction inst = method.Body.Instructions[x];
                         //int baseIndex = method.Body.Instructions.IndexOf(inst);
+                        if (inst.OpCode.Equals(OpCodes.Xor) || inst.OpCode.Equals(OpCodes.Mul) || inst.OpCode.Equals(OpCodes.Add) || inst.OpCode.Equals(OpCodes.Sub))
+                        {
+                            if (method.Body.Instructions[x - 1].OpCode.Equals(OpCodes.Ldc_I4) && method.Body.Instructions[x - 2].OpCode.Equals(OpCodes.Ldc_I4))
+                            {
+                                int endCalc = -1;
+                                int typeCalc = -1;
+                                switch (inst.OpCode.ToString())
+                                {
+                                    case "xor":
+                                        typeCalc = 0;
+                                        endCalc = int.Parse(method.Body.Instructions[x - 2].Operand.ToString()) ^ int.Parse(method.Body.Instructions[x - 1].Operand.ToString());
+                                        break;
+                                    case "mul":
+                                        typeCalc = 1;
+                                        endCalc = int.Parse(method.Body.Instructions[x - 2].Operand.ToString()) * int.Parse(method.Body.Instructions[x - 1].Operand.ToString());
+                                        break;
+                                    case "add":
+                                        typeCalc = 2;
+                                        endCalc = int.Parse(method.Body.Instructions[x - 2].Operand.ToString()) + int.Parse(method.Body.Instructions[x - 1].Operand.ToString());
+                                        break;
+                                    case "sub":
+                                        typeCalc = 3;
+                                        endCalc = int.Parse(method.Body.Instructions[x - 2].Operand.ToString()) - int.Parse(method.Body.Instructions[x - 1].Operand.ToString());
+                                        break;
+                                }
+                                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                switch (typeCalc)
+                                {
+                                    case 0:
+                                        Console.WriteLine(" Calculation fixed '" + method.Body.Instructions[x - 2].Operand.ToString() + " ^ " + method.Body.Instructions[x - 1].Operand.ToString() + "' -> '" + endCalc + "'!");
+                                        break;
+                                    case 1:
+                                        Console.WriteLine(" Calculation fixed '" + method.Body.Instructions[x - 2].Operand.ToString() + " * " + method.Body.Instructions[x - 1].Operand.ToString() + "' -> '" + endCalc + "'!");
+                                        break;
+                                    case 2:
+                                        Console.WriteLine(" Calculation fixed '" + method.Body.Instructions[x - 2].Operand.ToString() + " + " + method.Body.Instructions[x - 1].Operand.ToString() + "' -> '" + endCalc + "'!");
+                                        break;
+                                    case 3:
+                                        Console.WriteLine(" Calculation fixed '" + method.Body.Instructions[x - 2].Operand.ToString() + " - " + method.Body.Instructions[x - 1].Operand.ToString() + "' -> '" + endCalc + "'!");
+                                        break;
+                                }
+                                Instruction calculated = new Instruction(OpCodes.Ldc_I4, endCalc);
+                                method.Body.Instructions.RemoveAt(x - 2);
+                                method.Body.Instructions.RemoveAt(x - 2);
+                                method.Body.Instructions.RemoveAt(x - 2);
+                                method.Body.Instructions.Insert(x - 2, OpCodes.Ldc_I4.ToInstruction(endCalc));
+                                mathFixed++;
+                            }
+                        }
+                        if (inst.Operand == null) { continue; }
                         if (inst.OpCode.Equals(OpCodes.Newobj))
                         {
                             if (inst.Operand.ToString().Contains("TimeSpan"))
