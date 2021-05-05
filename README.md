@@ -32,7 +32,7 @@ this.button2.Size = new Size((int)new TimeSpan(0xF, 0x30, 0xB40, 0xC).TotalDays 
 this.button2.Size = new Size(0x13 + 1, 0x13 + ((0x1C9 < 0x418) ? 1 : 0));
 ```
 
-**Math Solver Example:**
+**Simple Math Solver Example:**
 
 PS: It does not support variable-based calculations
 ```csharp
