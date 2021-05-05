@@ -31,7 +31,28 @@ this.button2.Size = new Size((int)new TimeSpan(0xF, 0x30, 0xB40, 0xC).TotalDays 
 this.button2.Size = new Size(0x13 + 1, 0x13 + ((0x1C9 < 0x418) ? 1 : 0));
 ```
 
+**Math Solver Example:**
+
+PS: It does not support variable-based calculations
+```csharp
+// Before
+this.ProgressBar1.Value = 8 + 9
+this.ProgressBar2.Value = 8 - 9
+this.ProgressBar3.Value = 8 * 9
+this.ProgressBar4.Value = 8 ^ 9
+
+// After
+this.ProgressBar1.Value = 17
+this.ProgressBar2.Value = -1
+this.ProgressBar3.Value = 72
+this.ProgressBar4.Value = 1
+```
+
 # Screenshot
+![app](https://i.imgur.com/1CnH9MV.png)
+
+(v1.0 screenshot)
+
 ![app](https://i.imgur.com/8PIdh3O.png)
 
 # Credits
